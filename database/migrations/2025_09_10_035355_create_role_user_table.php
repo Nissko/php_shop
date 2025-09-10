@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->foreignId('parent_id')->index()->nullable()->constrained('categories');
+            $table->foreignId('user_id')->index()->constrained('users');
+            $table->foreignId('role_id')->index()->constrained('roles');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('role_user');
     }
 };
