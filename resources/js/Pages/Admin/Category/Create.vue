@@ -50,11 +50,12 @@ export default {
                 .then(res=>{
                     console.log(res);
                     this.category = {
-                        parent_id: null
-                    }
+                        parent_id: null,
+                    };
+                    this.categories.push(res.data)
                 })
         }
-    }
+    },
 }
 </script>
 

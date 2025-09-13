@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Resources\ProductGroup;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class ProductGroupResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title
+        ];
+    }
+}

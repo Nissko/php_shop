@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Product\StoreRequest;
 use App\Http\Requests\Admin\Product\UpdateRequest;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\ProductGroup\ProductGroupResource;
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Models\ProductGroup;
 use App\Services\ProductService;
 use Illuminate\Http\Response;
 
@@ -27,7 +31,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return inertia('Admin/Product/Create');
+        $categories = CategoryResource::collection(Category::all())->resolve();
+        $productGroups = ProductGroupResource::collection(ProductGroup::all())->resolve();
+        return inertia('Admin/Product/Create', compact('categories', 'productGroups'));
     }
 
     /**
@@ -55,8 +61,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $categories = CategoryResource::collection(Category::all())->resolve();
+        $productGroups = ProductGroupResource::collection(ProductGroup::all())->resolve();
         $product = ProductResource::make($product)->resolve();
-        return inertia('Admin/Product/Edit', compact('product'));
+        return inertia('Admin/Product/Edit', compact('product', 'categories', 'productGroups'));
     }
 
     /**
